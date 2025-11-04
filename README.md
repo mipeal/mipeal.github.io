@@ -20,14 +20,24 @@ class CyberSecurityEngineer:
 
     def __init__(self):
         self.name = "Md Mujahid Islam Peal"
-        self.role = "Cyber Range Engineer"
-        self.language_spoken = ["en_US","no_NO","bd_BD"]
+        self.role = "Senior Cyber Range Engineer & DevSecOps Specialist"
+        self.current_position = "Senior Engineer at NTNU"
+        self.department = "Department of Information Security and Communication Technology"
+        self.expertise = [
+            "Cyber Security", "Cyber Range Development", "System Automation",
+            "DevSecOps", "Security Toolchain Design", "Vulnerability Assessment"
+        ]
+        self.primary_languages = ["Python", "Rust", "Dart", "TypeScript", "Golang"]
+        self.cloud_platforms = ["Docker", "OpenStack", "KVM", "QEMU"]
+        self.research_areas = ["Incident Forensics", "Reverse Engineering", "CTF"]
+        self.languages_spoken = ["en_US", "no_NO", "bd_BD"]
 
     def say_hi(self):
-        print("Thanks for dropping by, hope you find some of my work interesting.")
+        print("Senior Engineer at NTNU specializing in cyber security and range development.")
+        print("Lead developer for Norwegian Cyber Range and S2G Playground initiatives.")
         
     def get_connected(self):
-        print("Let's get connected through linkedin!")
+        print("Let's connect on LinkedIn or explore my portfolio!")
 
 
 me = CyberSecurityEngineer()
@@ -37,18 +47,26 @@ me.get_connected()
 
 <a href="https://mipeal.myportfolio.com/"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"></a>
 
-## 📝 Blogs
+## 🎓 Professional Background
 
+**Senior Engineer at NTNU** | Department of Information Security and Communication Technology
+- **Norwegian Cyber Range** - Development Lead & Lab Engineer
+- **S2G Playground** - Organizing and Management Staff
+- **System Security Group** - Active Member
+- **Research Focus**: Cyber security, cyber ranges, system automation
+- **Collaborations**: NATO, CR14, Taltech, Cyberunity initiatives
+
+## 📝 Blogs & Portfolio
 - Personal website and blog: https://mipeal.myportfolio.com/
+- NTNU Employee Profile: https://www.ntnu.edu/employees/md.m.i.peal
 
 ## 🚀 Open Source Contributions
-- [SDL Parser](https://github.com/Open-Cyber-Range/SDL-parser)
-- [Deputy](https://github.com/Open-Cyber-Range/Deputy)
-- [Ranger](https://github.com/Open-Cyber-Range/Ranger)
-- [Openstack Handler](https://github.com/Open-Cyber-Range/Openstack-Handler)
+- [SDL Parser](https://github.com/Open-Cyber-Range/SDL-parser) - Open Cyber Range project
+- [Deputy](https://github.com/Open-Cyber-Range/Deputy) - Security automation tool
+- [Ranger](https://github.com/Open-Cyber-Range/Ranger) - Range management system
+- [Openstack Handler](https://github.com/Open-Cyber-Range/Openstack-Handler) - Infrastructure automation
 
 <a href="https://mipeal.myportfolio.com/"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"></a>
-
 
 ## 🔧 Technologies & Tools
 [![C](https://img.shields.io/badge/C-00599C?logo=c&logoColor=white)](#)
@@ -76,6 +94,9 @@ me.get_connected()
 [![Firebase](https://img.shields.io/badge/Firebase-039BE5?logo=Firebase&logoColor=white)](#)
 [![Visual Studio Code](https://custom-icon-badges.demolab.com/badge/Visual%20Studio%20Code-0078d7.svg?logo=vsc&logoColor=white)](#)
 [![Openstack](https://img.shields.io/badge/Openstack-F80000?logo=openstack&logoColor=white)](#)
+[![Ansible](https://img.shields.io/badge/Ansible-000000?logo=ansible&logoColor=white)](#)
+[![KVM](https://img.shields.io/badge/KVM-000000?logo=linux&logoColor=white)](#)
+[![QEMU](https://img.shields.io/badge/QEMU-000000?logo=qemu&logoColor=white)](#)
 
 <a href="https://mipeal.myportfolio.com/"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"></a>
 
@@ -84,13 +105,12 @@ me.get_connected()
 
 <a href="https://mipeal.myportfolio.com/"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"></a>
 
-## &#127894; GitHub Medals/Trophies
+## 🏆 GitHub Medals/Trophies
 <p align="center"><img src="https://github-profile-trophy.vercel.app/?username=mipeal&theme=nord&column=7" alt="githubtrophies" /></p>
-
 
 <a href="https://mipeal.myportfolio.com/"><img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif"></a>
 
-## &#x1F468;&#x200D;&#x1F4BB; Coding Stats
+## 💻 Coding Stats
 <!--START_SECTION:waka-->
 ![Lines of code](https://img.shields.io/badge/From%20Hello%20World%20I%27ve%20Written-2.9%20million%20lines%20of%20code-blue)
 
@@ -104,11 +124,5 @@ C                        1 repo              █░░░░░░░░░░�
 Java                     1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   02.56 % 
 ```
 
-
-
-
- Last Updated on 03/11/2025 01:48:03 UTC
+ Last Updated on 05/11/2025 00:23:58 UTC
 <!--END_SECTION:waka-->
-<!--
-[![Waka Readme](https://github.com/mipeal/mipeal/actions/workflows/wakatime.yml/badge.svg)](https://github.com/mipeal/mipeal/actions/workflows/wakatime.yml)
--->
