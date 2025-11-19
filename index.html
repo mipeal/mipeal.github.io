@@ -1,27 +1,35 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Md Mujahid Islam Peal | Cyber Security Engineer</title>
     <meta name="description" content="Portfolio of Md Mujahid Islam Peal - Senior Engineer at NTNU, specializing in Cyber Range, Rust, Python, and Cloud Automation.">
     
-    <!-- Favicon & Icons (Updated for Red Theme) -->
+    <!-- Favicon & Icons -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23050505' rx='20'/><text x='50' y='50' font-family='monospace' font-weight='900' font-size='60' fill='%23FF2E2E' text-anchor='middle' dy='.35em'>P.</text></svg>">
     <meta name="theme-color" content="#050505">
 
-    <!-- Open Graph / Social Media (Updated for Red Theme) -->
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Md Mujahid Islam Peal | Cyber Security Engineer">
     <meta property="og:description" content="Orchestrating Cyber Ranges, automating the cloud, and building the future of security infrastructure.">
     <meta property="og:image" content="https://placehold.co/1200x630/050505/FF2E2E.png?text=Md+Mujahid+Islam+Peal%0A///+Cyber+Security+Engineer">
     <meta property="twitter:card" content="summary_large_image">
 
+    <!-- Libraries: Tailwind, FontAwesome, Three.js, Lenis, Rive -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- Updated Lenis Script Source -->
+    <script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.29/bundled/lenis.min.js"></script> 
+    <script src="https://unpkg.com/@rive-app/canvas@2.7.0"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600;800;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Added Fugaz One and Open Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inter:wght@100;200;300;400;600;800;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary-red: #FF2E2E;
@@ -30,6 +38,26 @@
             --card-bg: #111111;
         }
         
+        html.lenis {
+            height: auto;
+        }
+        
+        .lenis.lenis-smooth {
+            scroll-behavior: auto;
+        }
+        
+        .lenis.lenis-smooth [data-lenis-prevent] {
+            overscroll-behavior: contain;
+        }
+        
+        .lenis.lenis-stopped {
+            overflow: hidden;
+        }
+        
+        .lenis.lenis-scrolling iframe {
+            pointer-events: none;
+        }
+
         body {
             background-color: var(--dark-bg);
             color: white;
@@ -41,19 +69,9 @@
             font-family: 'Space Grotesk', sans-serif;
         }
 
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #000;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-red);
+        /* New Class for Hero Font */
+        .font-fugaz {
+            font-family: 'Fugaz One', cursive;
         }
 
         /* Text Reveal Animation */
@@ -101,12 +119,38 @@
             width: 100%;
             height: 100%;
             z-index: 0;
-            opacity: 0.5; /* Slightly increased opacity for the red/yellow */
+            /* No opacity reduction here, handled in ThreeJS material */
         }
 
         .z-hero {
             position: relative;
             z-index: 10;
+        }
+
+        /* 3D Tilt Card Styles */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transform: perspective(1000px);
+        }
+        
+        .tilt-content {
+            transform: translateZ(20px);
+        }
+
+        .card-shine {
+            background: radial-gradient(
+                circle at var(--mouse-x) var(--mouse-y), 
+                rgba(255, 215, 0, 0.15), 
+                transparent 80%
+            );
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .group:hover .card-shine {
+            opacity: 1;
         }
     </style>
 </head>
@@ -125,14 +169,15 @@
     </div>
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-40 bg-black/80 backdrop-blur-sm border-b border-white/10">
+    <nav class="fixed w-full z-40 bg-black/80 backdrop-blur-sm border-b border-white/10 transition-all duration-300" id="navbar">
         <div class="max-w-[1800px] mx-auto px-6 h-20 flex justify-between items-center">
             <a href="#" class="flex items-center gap-3 text-2xl font-black tracking-tighter italic glitch-hover cursor-pointer group">
                 <div class="relative flex items-center justify-center w-10 h-10 bg-white/5 rounded border border-white/10 group-hover:border-[#FF2E2E] transition-colors">
                     <i class="fa-solid fa-shield-halved text-[#FFD700] text-lg group-hover:scale-110 transition-transform"></i>
                     <div class="absolute inset-0 bg-[#FF2E2E] blur-xl opacity-0 group-hover:opacity-20 transition-opacity"></div>
                 </div>
-                <span>PEAL<span class="text-[#FF2E2E]">.</span></span>
+                <!-- Updated Navbar Text -->
+                <span>MIPEAL<span class="text-[#FF2E2E]">.</span></span>
             </a>
             
             <div class="hidden md:flex space-x-12 text-sm font-bold tracking-widest uppercase">
@@ -156,40 +201,41 @@
         </div>
     </nav>
 
-    <!-- Hero Section with Canvas Animation -->
+    <!-- Hero Section with WebGL Animation -->
     <header id="home" class="relative h-screen flex items-center justify-center overflow-hidden pt-20 bg-black">
         
-        <!-- The Cyber Warp Canvas -->
-        <canvas id="hero-canvas"></canvas>
+        <!-- Three.js Canvas -->
+        <div id="hero-canvas" class="w-full h-full absolute inset-0"></div>
 
-        <div class="container mx-auto px-6 z-hero">
+        <div class="container mx-auto px-6 z-hero pointer-events-none"> <!-- Pointer events none to let clicks pass to canvas if needed -->
             <div class="flex flex-col md:flex-row items-end md:items-center justify-between">
                 
                 <!-- Main Text with Reveal Masks -->
-                <div class="w-full md:w-3/4">
+                <div class="w-full md:w-3/4 pointer-events-auto">
                     <div class="reveal-container mb-4">
                         <p class="reveal-content text-[#FFD700] font-mono delay-100">/// SENIOR ENGINEER @ NTNU</p>
                     </div>
                     
-                    <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.85] tracking-tighter mb-8">
+                    <!-- Applied font-fugaz class here -->
+                    <h1 class="font-fugaz text-4xl md:text-6xl lg:text-7xl font-black uppercase leading-[0.85] tracking-tighter mb-8">
                         <span class="reveal-container block">
-                            <span class="reveal-content block delay-200">MD MUJAHID</span>
+                            <span class="reveal-content block delay-200">MD MUJAHID ISLAM</span>
                         </span>
                         <span class="reveal-container block">
-                            <!-- Gradient Text from Red to Yellow -->
-                            <span class="reveal-content block delay-300 text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E2E] via-[#FF8C00] to-[#FFD700]">ISLAM PEAL</span>
+                            <!-- Updated Hero Text: Peal -->
+                            <span class="reveal-content block delay-300 text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E2E] via-[#FF8C00] to-[#FFD700]">PEAL</span>
                         </span>
                     </h1>
 
                     <div class="reveal-container">
                         <p class="reveal-content delay-400 text-gray-400 text-xl md:text-2xl max-w-2xl font-light border-l-4 border-[#FF2E2E] pl-6 backdrop-blur-sm bg-black/30">
-                            Orchestrating Cyber Ranges, automating the cloud, and building the future of security infrastructure in Rust & Python.
+                            Orchestrating Cyber Ranges, automating the cloud, and building the future of security infrastructure.
                         </p>
                     </div>
                 </div>
 
                 <!-- Stat / Quick Link -->
-                <div class="hidden md:flex flex-col items-end justify-center h-full mt-12 md:mt-0 opacity-0 animate-[fadeInUp_1s_ease-out_1s_forwards]">
+                <div class="hidden md:flex flex-col items-end justify-center h-full mt-12 md:mt-0 opacity-0 animate-[fadeInUp_1s_ease-out_1s_forwards] pointer-events-auto">
                     <div class="text-right group cursor-default">
                         <span class="block text-5xl font-bold text-[#FF2E2E] group-hover:translate-x-2 transition-transform">5+</span>
                         <span class="block text-sm text-gray-400 uppercase tracking-widest">Open Source Tools</span>
@@ -203,15 +249,16 @@
             </div>
         </div>
 
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-50 z-hero">
-            <span class="text-[10px] uppercase tracking-[0.2em] mb-2">Scroll</span>
-            <i class="fa-solid fa-chevron-down text-[#FFD700]"></i>
+        <!-- Rive/Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center z-hero pointer-events-auto cursor-pointer" onclick="lenis.scrollTo('#work')">
+            <!-- Placeholder for Rive Canvas -->
+            <canvas id="rive-scroll" width="50" height="50" class="mb-2"></canvas>
+            <span class="text-[10px] uppercase tracking-[0.2em] text-[#FFD700] animate-pulse">Scroll Down</span>
         </div>
     </header>
 
-    <!-- "On Code" / Projects Section -->
-    <section id="work" class="py-24 bg-[#0a0a0a] border-t border-white/5">
+    <!-- "On Code" / Projects Section with 3D Cards -->
+    <section id="work" class="py-24 bg-[#0a0a0a] border-t border-white/5 relative z-10">
         <div class="container mx-auto px-6">
             <div class="flex justify-between items-end mb-16">
                 <div>
@@ -224,121 +271,128 @@
             </div>
 
             <!-- Grid -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="card-grid">
                 <!-- Project 1 -->
-                <a href="https://github.com/Open-Cyber-Range/Ranger" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <a href="https://github.com/Open-Cyber-Range/Ranger" target="_blank" class="group tilt-card relative h-[400px] bg-[#111] border border-white/5 transition-all duration-200 ease-out flex flex-col justify-between p-8 overflow-hidden rounded-sm hover:z-20">
+                    <div class="card-shine absolute inset-0"></div>
+                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity tilt-content">
                         <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
                     </div>
-                    <div class="z-10">
+                    <div class="z-10 tilt-content">
                         <span class="inline-block px-2 py-1 bg-orange-500/20 text-orange-500 text-xs font-bold uppercase mb-4">Rust</span>
-                        <h3 class="text-3xl font-bold uppercase">Ranger</h3>
+                        <h3 class="text-3xl font-bold uppercase group-hover:text-[#FF2E2E] transition-colors">Ranger</h3>
                         <p class="text-gray-500 mt-2 text-sm line-clamp-3">
                             Core component for the Open Cyber Range. High-performance orchestration tool written in Rust.
                         </p>
                     </div>
-                    <!-- Red to Yellow Gradient Background Effect -->
                     <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <div class="z-10 mt-auto">
+                    <div class="z-10 mt-auto tilt-content">
                         <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// OPEN SOURCE</span>
                     </div>
                 </a>
 
                 <!-- Project 2 -->
-                <a href="https://github.com/Open-Cyber-Range/Deputy" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <a href="https://github.com/Open-Cyber-Range/Deputy" target="_blank" class="group tilt-card relative h-[400px] bg-[#111] border border-white/5 transition-all duration-200 ease-out flex flex-col justify-between p-8 overflow-hidden rounded-sm hover:z-20">
+                     <div class="card-shine absolute inset-0"></div>
+                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity tilt-content">
                         <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
                     </div>
-                    <div class="z-10">
+                    <div class="z-10 tilt-content">
                         <span class="inline-block px-2 py-1 bg-orange-500/20 text-orange-500 text-xs font-bold uppercase mb-4">Rust</span>
-                        <h3 class="text-3xl font-bold uppercase">Deputy</h3>
+                        <h3 class="text-3xl font-bold uppercase group-hover:text-[#FF2E2E] transition-colors">Deputy</h3>
                         <p class="text-gray-500 mt-2 text-sm">
                              Security enforcement and monitoring agent. Part of the OCR ecosystem.
                         </p>
                     </div>
                     <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <div class="z-10 mt-auto">
+                    <div class="z-10 mt-auto tilt-content">
                         <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// OPEN SOURCE</span>
                     </div>
                 </a>
 
                 <!-- Project 3 -->
-                <a href="https://github.com/Open-Cyber-Range/SDL-parser" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
-                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <a href="https://github.com/Open-Cyber-Range/SDL-parser" target="_blank" class="group tilt-card relative h-[400px] bg-[#111] border border-white/5 transition-all duration-200 ease-out flex flex-col justify-between p-8 overflow-hidden rounded-sm hover:z-20">
+                     <div class="card-shine absolute inset-0"></div>
+                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity tilt-content">
                         <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
                     </div>
-                    <div class="z-10">
+                    <div class="z-10 tilt-content">
                         <span class="inline-block px-2 py-1 bg-orange-500/20 text-orange-500 text-xs font-bold uppercase mb-4">Rust</span>
-                        <h3 class="text-3xl font-bold uppercase">SDL Parser</h3>
+                        <h3 class="text-3xl font-bold uppercase group-hover:text-[#FF2E2E] transition-colors">SDL Parser</h3>
                         <p class="text-gray-500 mt-2 text-sm">
                              Scenario Description Language parser for defining cyber range exercises automatically.
                         </p>
                     </div>
                     <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <div class="z-10 mt-auto">
+                    <div class="z-10 mt-auto tilt-content">
                         <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// PARSER TOOL</span>
                     </div>
                 </a>
 
                 <!-- Project 4 -->
-                <a href="https://github.com/Open-Cyber-Range/Openstack-Handler" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
-                     <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                <a href="https://github.com/Open-Cyber-Range/Openstack-Handler" target="_blank" class="group tilt-card relative h-[400px] bg-[#111] border border-white/5 transition-all duration-200 ease-out flex flex-col justify-between p-8 overflow-hidden rounded-sm hover:z-20">
+                     <div class="card-shine absolute inset-0"></div>
+                     <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity tilt-content">
                         <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
                     </div>
-                    <div class="z-10">
+                    <div class="z-10 tilt-content">
                         <span class="inline-block px-2 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold uppercase mb-4">Python</span>
-                        <h3 class="text-3xl font-bold uppercase">Openstack Handler</h3>
+                        <h3 class="text-3xl font-bold uppercase group-hover:text-[#FF2E2E] transition-colors">Openstack Handler</h3>
                         <p class="text-gray-500 mt-2 text-sm">
                              Python handler for interacting with Openstack virtualization platforms.
                         </p>
                     </div>
                     <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <div class="z-10 mt-auto">
+                    <div class="z-10 mt-auto tilt-content">
                         <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// INFRASTRUCTURE</span>
                     </div>
                 </a>
                 
                  <!-- Project 5 -->
-                 <a href="https://github.com/ncr-no/JuleCTF" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
-                     <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                 <a href="https://github.com/ncr-no/JuleCTF" target="_blank" class="group tilt-card relative h-[400px] bg-[#111] border border-white/5 transition-all duration-200 ease-out flex flex-col justify-between p-8 overflow-hidden rounded-sm hover:z-20">
+                     <div class="card-shine absolute inset-0"></div>
+                     <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity tilt-content">
                         <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
                     </div>
-                    <div class="z-10">
+                    <div class="z-10 tilt-content">
                         <span class="inline-block px-2 py-1 bg-green-500/20 text-green-400 text-xs font-bold uppercase mb-4">Security</span>
-                        <h3 class="text-3xl font-bold uppercase">Jule CTF</h3>
+                        <h3 class="text-3xl font-bold uppercase group-hover:text-[#FF2E2E] transition-colors">Jule CTF</h3>
                         <p class="text-gray-500 mt-2 text-sm">
                              Challenge set for the 2022 Norwegian Christmas Capture The Flag competition.
                         </p>
                     </div>
                     <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
-                    <div class="z-10 mt-auto">
+                    <div class="z-10 mt-auto tilt-content">
                         <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// EVENT</span>
                     </div>
                 </a>
 
                 <!-- More Link -->
-                <a href="https://github.com/mipeal" target="_blank" class="group relative h-[400px] bg-[#FF2E2E] text-black flex flex-col justify-center items-center p-8 overflow-hidden hover:bg-[#FFD700] transition-colors duration-300">
-                    <h3 class="text-4xl font-black uppercase text-center mb-2">Explore<br>More</h3>
-                    <div class="w-12 h-1 bg-black group-hover:w-24 transition-all duration-300"></div>
-                    <i class="fa-brands fa-github text-5xl mt-6 transform group-hover:scale-125 transition-transform"></i>
+                <a href="https://github.com/mipeal" target="_blank" class="group tilt-card relative h-[400px] bg-[#FF2E2E] text-black flex flex-col justify-center items-center p-8 overflow-hidden hover:bg-[#FFD700] transition-colors duration-300 rounded-sm">
+                     <div class="card-shine absolute inset-0 mix-blend-overlay"></div>
+                    <h3 class="text-4xl font-black uppercase text-center mb-2 tilt-content">Explore<br>More</h3>
+                    <div class="w-12 h-1 bg-black group-hover:w-24 transition-all duration-300 tilt-content"></div>
+                    <i class="fa-brands fa-github text-5xl mt-6 transform group-hover:scale-125 transition-transform tilt-content"></i>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- "Off Code" / About Section -->
+    <!-- "Off Code" / About Section with WebGL Orb -->
     <section id="about" class="py-24 relative overflow-hidden">
         <div class="container mx-auto px-6 relative z-10">
             <div class="flex flex-col lg:flex-row gap-16">
                 <!-- Left: Image/Visual -->
                 <div class="lg:w-1/2">
-                    <div class="relative">
+                    <div class="relative group">
                         <!-- Decorative borders -->
-                        <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-[#FF2E2E]"></div>
-                        <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-[#FFD700]"></div>
+                        <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-[#FF2E2E] transition-all duration-500 group-hover:-top-6 group-hover:-left-6"></div>
+                        <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-[#FFD700] transition-all duration-500 group-hover:-bottom-6 group-hover:-right-6"></div>
                         
-                        <div class="bg-neutral-900 aspect-[4/5] flex items-center justify-center border border-gray-800">
-                            <div class="text-center p-10">
+                        <div class="bg-neutral-900 aspect-[4/5] flex items-center justify-center border border-gray-800 relative overflow-hidden">
+                             <!-- WebGL Orb Container -->
+                             <div id="orb-canvas" class="absolute inset-0 opacity-30"></div>
+                            <div class="text-center p-10 z-10">
                                 <i class="fa-solid fa-terminal text-8xl text-neutral-800 mb-6"></i>
                                 <p class="text-gray-500 font-mono text-sm">MD MUJAHID ISLAM PEAL</p>
                                 <p class="text-[#FF2E2E] font-bold text-xl mt-2">NTNU, NORWAY</p>
@@ -358,14 +412,11 @@
                     <p class="text-gray-400 mb-6 leading-relaxed">
                         I am a Senior Engineer at the <strong class="text-white">Norwegian Cyber Range</strong> (NTNU), specializing in building resilient cyber infrastructure. My work bridges the gap between complex virtualization technology and actionable security training environments.
                     </p>
-                    <p class="text-gray-400 mb-8 leading-relaxed">
-                        With a deep focus on <strong class="text-white">Rust</strong> and <strong class="text-white">Python</strong>, I develop tools like 'Ranger' and 'Deputy' that automate the deployment of massive-scale cyber exercises for NATO and other partners.
-                    </p>
 
                     <!-- Mini Timeline -->
                     <div class="space-y-6 border-l border-gray-800 pl-8 mt-4">
                         <div class="relative">
-                            <div class="absolute -left-[37px] top-1 w-4 h-4 bg-[#FF2E2E] rounded-full shadow-[0_0_10px_#FF2E2E]"></div>
+                            <div class="absolute -left-[37px] top-1 w-4 h-4 bg-[#FF2E2E] rounded-full shadow-[0_0_10px_#FF2E2E] animate-pulse"></div>
                             <h4 class="text-white font-bold uppercase">Senior Engineer</h4>
                             <p class="text-sm text-gray-500">NTNU / Norwegian Cyber Range • 2021 - Present</p>
                         </div>
@@ -374,18 +425,13 @@
                             <h4 class="text-white font-bold uppercase">Organizer</h4>
                             <p class="text-sm text-gray-500">S2G Playground • Event Management</p>
                         </div>
-                         <div class="relative">
-                            <div class="absolute -left-[37px] top-1 w-4 h-4 bg-gray-700 rounded-full"></div>
-                            <h4 class="text-white font-bold uppercase">Research Assistant</h4>
-                            <p class="text-sm text-gray-500">NTNU • 2021</p>
-                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- The Stack / Helmets Style List -->
+    <!-- The Stack -->
     <section id="stack" class="py-20 bg-[#050505] border-y border-white/10">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
@@ -395,50 +441,42 @@
 
             <div class="flex flex-wrap justify-center gap-4 md:gap-8">
                 <!-- Tech Pill -->
-                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FF2E2E] transition-colors cursor-default">
-                    <i class="fa-brands fa-rust text-3xl text-white"></i>
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FF2E2E] transition-colors cursor-default group">
+                    <i class="fa-brands fa-rust text-3xl text-white group-hover:text-[#FF2E2E] transition-colors"></i>
                     <div>
                         <span class="block text-xs text-gray-500 uppercase">Language</span>
                         <span class="block text-xl font-bold text-white">RUST</span>
                     </div>
                 </div>
                 <!-- Tech Pill -->
-                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FFD700] transition-colors cursor-default">
-                    <i class="fa-brands fa-python text-3xl text-blue-400"></i>
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FFD700] transition-colors cursor-default group">
+                    <i class="fa-brands fa-python text-3xl text-blue-400 group-hover:text-[#FFD700] transition-colors"></i>
                     <div>
                         <span class="block text-xs text-gray-500 uppercase">Language</span>
                         <span class="block text-xl font-bold text-white">PYTHON</span>
                     </div>
                 </div>
                 <!-- Tech Pill -->
-                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FF2E2E] transition-colors cursor-default">
-                    <i class="fa-brands fa-docker text-3xl text-blue-600"></i>
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FF2E2E] transition-colors cursor-default group">
+                    <i class="fa-brands fa-docker text-3xl text-blue-600 group-hover:text-[#FF2E2E] transition-colors"></i>
                     <div>
                         <span class="block text-xs text-gray-500 uppercase">Container</span>
                         <span class="block text-xl font-bold text-white">DOCKER</span>
                     </div>
                 </div>
                  <!-- Tech Pill -->
-                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FFD700] transition-colors cursor-default">
-                    <i class="fa-solid fa-cloud text-3xl text-gray-400"></i>
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FFD700] transition-colors cursor-default group">
+                    <i class="fa-solid fa-cloud text-3xl text-gray-400 group-hover:text-[#FFD700] transition-colors"></i>
                     <div>
                         <span class="block text-xs text-gray-500 uppercase">Cloud</span>
                         <span class="block text-xl font-bold text-white">OPENSTACK</span>
-                    </div>
-                </div>
-                 <!-- Tech Pill -->
-                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FF2E2E] transition-colors cursor-default">
-                    <i class="fa-solid fa-shield-halved text-3xl text-[#FF2E2E]"></i>
-                    <div>
-                        <span class="block text-xs text-gray-500 uppercase">Domain</span>
-                        <span class="block text-xl font-bold text-white">CYBERSEC</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer / Contact -->
+    <!-- Footer -->
     <footer id="contact" class="py-24 bg-black relative overflow-hidden">
         <div class="container mx-auto px-6 text-center relative z-10">
             <p class="text-[#FF2E2E] font-mono mb-6">/// CONNECT</p>
@@ -452,9 +490,6 @@
                 </a>
                 <a href="https://github.com/mipeal" target="_blank" class="px-10 py-4 border border-white text-white font-bold uppercase tracking-widest hover:border-[#FFD700] hover:text-[#FFD700] transition-colors">
                     GitHub
-                </a>
-                 <a href="https://www.ntnu.edu/employees/md.m.i.peal" target="_blank" class="px-10 py-4 border border-white text-white font-bold uppercase tracking-widest hover:border-[#FF2E2E] hover:text-[#FF2E2E] transition-colors">
-                    NTNU Profile
                 </a>
             </div>
 
@@ -474,101 +509,200 @@
     </footer>
 
     <script>
+        // --- 1. SMOOTH SCROLL (LENIS) ---
+        // Initialize in a function to ensure script is loaded
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                    direction: 'vertical',
+                    gestureDirection: 'vertical',
+                    smooth: true,
+                    mouseMultiplier: 1,
+                    smoothTouch: false,
+                    touchMultiplier: 2,
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+                
+                // Expose to window for the scroll button
+                window.lenis = lenis; 
+            } else {
+                console.warn("Lenis library not loaded. Smooth scroll disabled.");
+                // Fallback for the scroll button if Lenis fails
+                window.lenis = { 
+                    scrollTo: (target) => document.querySelector(target).scrollIntoView({behavior: 'smooth'}) 
+                };
+            }
+        });
+
+
+        // --- 2. THREE.JS HERO ANIMATION (Warp Tunnel) ---
+        const initHero = () => {
+            const container = document.getElementById('hero-canvas');
+            const scene = new THREE.Scene();
+            scene.fog = new THREE.FogExp2(0x000000, 0.001);
+            
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+            camera.position.z = 1000;
+
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            container.appendChild(renderer.domElement);
+
+            // Create Particles
+            const geometry = new THREE.BufferGeometry();
+            const count = 3000; // Number of stars
+            const positions = new Float32Array(count * 3);
+            const colors = new Float32Array(count * 3);
+
+            for(let i = 0; i < count * 3; i+=3) {
+                // Position
+                positions[i] = (Math.random() - 0.5) * 2000;   // x
+                positions[i+1] = (Math.random() - 0.5) * 2000; // y
+                positions[i+2] = (Math.random() - 0.5) * 4000; // z
+
+                // Color (Red or Yellow)
+                const isRed = Math.random() > 0.5;
+                const color = new THREE.Color(isRed ? 0xFF2E2E : 0xFFD700);
+                colors[i] = color.r;
+                colors[i+1] = color.g;
+                colors[i+2] = color.b;
+            }
+
+            geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+
+            const material = new THREE.PointsMaterial({
+                size: 3,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.8,
+                sizeAttenuation: true
+            });
+
+            const particles = new THREE.Points(geometry, material);
+            scene.add(particles);
+
+            // Animation Loop
+            const animate = () => {
+                requestAnimationFrame(animate);
+                
+                // Move particles towards camera (Warp Speed)
+                const positions = particles.geometry.attributes.position.array;
+                for(let i = 2; i < count * 3; i+=3) {
+                    positions[i] += 15; // Speed
+                    if(positions[i] > 1000) {
+                        positions[i] = -3000; // Reset to far back
+                    }
+                }
+                particles.geometry.attributes.position.needsUpdate = true;
+                
+                // Rotate tunnel slightly on mouse move
+                particles.rotation.z += 0.001;
+
+                renderer.render(scene, camera);
+            };
+            animate();
+
+            // Resize Handler
+            window.addEventListener('resize', () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+        }
+        
+        // Initialize Hero only after DOM is ready
+        document.addEventListener("DOMContentLoaded", initHero);
+
+
+        // --- 3. INTERACTIVE 3D TILT CARDS (Rive-like interactivity) ---
+        const cards = document.querySelectorAll('.tilt-card');
+
+        cards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                // Center of card
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                // Tilt calc (max 15 degrees)
+                const rotateX = ((y - centerY) / centerY) * -10;
+                const rotateY = ((x - centerX) / centerX) * 10;
+                
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                
+                // Glare effect position
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+            });
+        });
+
+
+        // --- 4. RIVE INTEGRATION (Placeholder Logic) ---
+        // If you have a .riv file, you would load it here. 
+        // Since we don't have one, we'll use Canvas API to draw a placeholder that looks technical.
+        
+        const riveCanvas = document.getElementById('rive-scroll');
+        if(riveCanvas) {
+            try {
+                // If we had a file:
+                // const r = new rive.Rive({
+                //     src: 'assets/scroll.riv',
+                //     canvas: riveCanvas,
+                //     autoplay: true,
+                // });
+                
+                // Fallback: Simple Pulse Animation
+                const rctx = riveCanvas.getContext('2d');
+                let radius = 10;
+                let growing = true;
+                function drawRivePlaceholder() {
+                    rctx.clearRect(0, 0, 50, 50);
+                    rctx.beginPath();
+                    rctx.strokeStyle = '#FF2E2E';
+                    rctx.lineWidth = 2;
+                    rctx.arc(25, 25, radius, 0, Math.PI*2);
+                    rctx.stroke();
+                    
+                    if(growing) radius += 0.2; else radius -= 0.2;
+                    if(radius > 15) growing = false;
+                    if(radius < 8) growing = true;
+                    
+                    requestAnimationFrame(drawRivePlaceholder);
+                }
+                drawRivePlaceholder();
+            } catch(e) { console.log("Rive not loaded"); }
+        }
+
         // Mobile Menu Toggle
         function toggleMenu() {
             const menu = document.getElementById('mobile-menu');
             menu.classList.toggle('translate-x-full');
         }
-
-        // --- WARP SPEED CANVAS ANIMATION (Red & Yellow) ---
-        const canvas = document.getElementById('hero-canvas');
-        const ctx = canvas.getContext('2d');
         
-        let width, height;
-        let stars = [];
-        const STAR_COUNT = 200;
-        const SPEED = 0.2; // Slightly faster for red/yellow aggressive theme
-        const ACCEL = 1.05; 
-
-        function resize() {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-            stars = [];
-            for(let i=0; i<STAR_COUNT; i++) {
-                stars.push(createStar());
-            }
-        }
-
-        function createStar() {
-            return {
-                x: Math.random() * width - width/2,
-                y: Math.random() * height - height/2,
-                z: Math.random() * width // depth
-            };
-        }
-
-        function draw() {
-            // Clear with trail effect
-            ctx.fillStyle = 'rgba(5, 5, 5, 0.2)';
-            ctx.fillRect(0, 0, width, height);
-            
-            ctx.translate(width/2, height/2);
-            
-            stars.forEach((star) => {
-                // Move star closer
-                star.z -= SPEED * 50;
-                
-                if(star.z <= 0) {
-                    let s = createStar();
-                    star.x = s.x;
-                    star.y = s.y;
-                    star.z = width;
+        // Intersection Observer for fade-ins
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if(entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                    observer.unobserve(entry.target);
                 }
-                
-                // Project star to 2D
-                const sx = (star.x / star.z) * width;
-                const sy = (star.y / star.z) * height;
-                
-                // Calculate size based on depth
-                const size = (1 - star.z / width) * 4;
-                
-                // Draw star (Random Mix of Red and Yellow)
-                ctx.beginPath();
-                const isRed = Math.random() > 0.5;
-                ctx.fillStyle = isRed ? '#FF2E2E' : '#FFD700';
-                ctx.arc(sx, sy, size, 0, Math.PI * 2);
-                ctx.fill();
             });
-            
-            ctx.translate(-width/2, -height/2);
-            requestAnimationFrame(draw);
-        }
-
-        window.addEventListener('resize', resize);
-        resize();
-        draw();
-
-        // --- INTERSECTION OBSERVER FOR SCROLL REVEAL ---
-        document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: "0px"
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in-up');
-                        observer.unobserve(entry.target); // Only animate once
-                    }
-                });
-            }, observerOptions);
-
-            // Select additional sections if needed
-            // const sections = document.querySelectorAll('section');
-            // sections.forEach(sec => observer.observe(sec));
         });
     </script>
 </body>
