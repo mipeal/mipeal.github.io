@@ -1,15 +1,575 @@
-<!doctype html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <script type="module" crossorigin src="./assets/index-CDHYaQng.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-C-jrix9J.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Md Mujahid Islam Peal | Cyber Security Engineer</title>
+    <meta name="description" content="Portfolio of Md Mujahid Islam Peal - Senior Engineer at NTNU, specializing in Cyber Range, Rust, Python, and Cloud Automation.">
+    
+    <!-- Favicon & Icons (Updated for Red Theme) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23050505' rx='20'/><text x='50' y='50' font-family='monospace' font-weight='900' font-size='60' fill='%23FF2E2E' text-anchor='middle' dy='.35em'>P.</text></svg>">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Open Graph / Social Media (Updated for Red Theme) -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Md Mujahid Islam Peal | Cyber Security Engineer">
+    <meta property="og:description" content="Orchestrating Cyber Ranges, automating the cloud, and building the future of security infrastructure.">
+    <meta property="og:image" content="https://placehold.co/1200x630/050505/FF2E2E.png?text=Md+Mujahid+Islam+Peal%0A///+Cyber+Security+Engineer">
+    <meta property="twitter:card" content="summary_large_image">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;600;800;900&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-red: #FF2E2E;
+            --accent-yellow: #FFD700;
+            --dark-bg: #050505;
+            --card-bg: #111111;
+        }
+        
+        body {
+            background-color: var(--dark-bg);
+            color: white;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .display-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-red);
+        }
+
+        /* Text Reveal Animation */
+        .reveal-container {
+            overflow: hidden;
+            display: block;
+        }
+        
+        .reveal-content {
+            transform: translateY(100%);
+            animation: textReveal 1.2s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+        }
+
+        @keyframes textReveal {
+            0% { transform: translateY(100%); }
+            100% { transform: translateY(0); }
+        }
+
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        
+        /* Glitch Effect on Hover */
+        .glitch-hover:hover {
+            animation: glitch 0.3s cubic-bezier(.25, .46, .45, .94) both infinite;
+            color: var(--accent-yellow);
+            text-shadow: 2px 2px var(--primary-red);
+        }
+
+        @keyframes glitch {
+            0% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+            100% { transform: translate(0); }
+        }
+
+        /* Canvas styling */
+        #hero-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.5; /* Slightly increased opacity for the red/yellow */
+        }
+
+        .z-hero {
+            position: relative;
+            z-index: 10;
+        }
+    </style>
 </head>
+<body class="antialiased selection:bg-[#FF2E2E] selection:text-white">
 
-<body>
-  <div id="root"></div>
+    <!-- Mobile Navigation Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-black z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-center items-center text-4xl font-bold space-y-8">
+        <button onclick="toggleMenu()" class="absolute top-6 right-6 text-white hover:text-[#FF2E2E]">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <a href="#home" onclick="toggleMenu()" class="hover:text-[#FF2E2E] transition-colors">HOME</a>
+        <a href="#work" onclick="toggleMenu()" class="hover:text-[#FF2E2E] transition-colors">ON CODE</a>
+        <a href="#about" onclick="toggleMenu()" class="hover:text-[#FF2E2E] transition-colors">OFF CODE</a>
+        <a href="#stack" onclick="toggleMenu()" class="hover:text-[#FF2E2E] transition-colors">THE STACK</a>
+        <a href="#contact" onclick="toggleMenu()" class="hover:text-[#FF2E2E] transition-colors">CONTACT</a>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-40 bg-black/80 backdrop-blur-sm border-b border-white/10">
+        <div class="max-w-[1800px] mx-auto px-6 h-20 flex justify-between items-center">
+            <a href="#" class="flex items-center gap-3 text-2xl font-black tracking-tighter italic glitch-hover cursor-pointer group">
+                <div class="relative flex items-center justify-center w-10 h-10 bg-white/5 rounded border border-white/10 group-hover:border-[#FF2E2E] transition-colors">
+                    <i class="fa-solid fa-shield-halved text-[#FFD700] text-lg group-hover:scale-110 transition-transform"></i>
+                    <div class="absolute inset-0 bg-[#FF2E2E] blur-xl opacity-0 group-hover:opacity-20 transition-opacity"></div>
+                </div>
+                <span>PEAL<span class="text-[#FF2E2E]">.</span></span>
+            </a>
+            
+            <div class="hidden md:flex space-x-12 text-sm font-bold tracking-widest uppercase">
+                <a href="#work" class="hover:text-[#FFD700] transition-colors">On Code</a>
+                <a href="#about" class="hover:text-[#FFD700] transition-colors">Off Code</a>
+                <a href="#stack" class="hover:text-[#FFD700] transition-colors">Stack</a>
+                <a href="#contact" class="hover:text-[#FFD700] transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-6">
+                <a href="https://github.com/mipeal" target="_blank" class="hidden md:block hover:text-[#FF2E2E] transition-transform hover:-translate-y-1">
+                    <i class="fa-brands fa-github text-xl"></i>
+                </a>
+                <a href="mailto:md.m.i.peal@ntnu.no" class="hidden md:block hover:text-[#FF2E2E] transition-transform hover:-translate-y-1">
+                    <i class="fa-solid fa-envelope text-xl"></i>
+                </a>
+                <button onclick="toggleMenu()" class="md:hidden text-2xl hover:text-[#FF2E2E]">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with Canvas Animation -->
+    <header id="home" class="relative h-screen flex items-center justify-center overflow-hidden pt-20 bg-black">
+        
+        <!-- The Cyber Warp Canvas -->
+        <canvas id="hero-canvas"></canvas>
+
+        <div class="container mx-auto px-6 z-hero">
+            <div class="flex flex-col md:flex-row items-end md:items-center justify-between">
+                
+                <!-- Main Text with Reveal Masks -->
+                <div class="w-full md:w-3/4">
+                    <div class="reveal-container mb-4">
+                        <p class="reveal-content text-[#FFD700] font-mono delay-100">/// SENIOR ENGINEER @ NTNU</p>
+                    </div>
+                    
+                    <h1 class="text-6xl md:text-8xl lg:text-9xl font-black uppercase leading-[0.85] tracking-tighter mb-8">
+                        <span class="reveal-container block">
+                            <span class="reveal-content block delay-200">MD MUJAHID</span>
+                        </span>
+                        <span class="reveal-container block">
+                            <!-- Gradient Text from Red to Yellow -->
+                            <span class="reveal-content block delay-300 text-transparent bg-clip-text bg-gradient-to-r from-[#FF2E2E] via-[#FF8C00] to-[#FFD700]">ISLAM PEAL</span>
+                        </span>
+                    </h1>
+
+                    <div class="reveal-container">
+                        <p class="reveal-content delay-400 text-gray-400 text-xl md:text-2xl max-w-2xl font-light border-l-4 border-[#FF2E2E] pl-6 backdrop-blur-sm bg-black/30">
+                            Orchestrating Cyber Ranges, automating the cloud, and building the future of security infrastructure in Rust & Python.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Stat / Quick Link -->
+                <div class="hidden md:flex flex-col items-end justify-center h-full mt-12 md:mt-0 opacity-0 animate-[fadeInUp_1s_ease-out_1s_forwards]">
+                    <div class="text-right group cursor-default">
+                        <span class="block text-5xl font-bold text-[#FF2E2E] group-hover:translate-x-2 transition-transform">5+</span>
+                        <span class="block text-sm text-gray-400 uppercase tracking-widest">Open Source Tools</span>
+                    </div>
+                    <div class="h-16 w-px bg-gray-800 my-6"></div>
+                    <div class="text-right group cursor-default">
+                        <span class="block text-5xl font-bold text-white group-hover:translate-x-2 transition-transform">NO</span>
+                        <span class="block text-sm text-gray-400 uppercase tracking-widest">Based in Norway</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center animate-bounce opacity-50 z-hero">
+            <span class="text-[10px] uppercase tracking-[0.2em] mb-2">Scroll</span>
+            <i class="fa-solid fa-chevron-down text-[#FFD700]"></i>
+        </div>
+    </header>
+
+    <!-- "On Code" / Projects Section -->
+    <section id="work" class="py-24 bg-[#0a0a0a] border-t border-white/5">
+        <div class="container mx-auto px-6">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <span class="text-[#FF2E2E] font-mono text-sm">/// SELECTED WORKS</span>
+                    <h2 class="text-5xl md:text-7xl font-bold uppercase tracking-tighter mt-2">On Code</h2>
+                </div>
+                <a href="https://github.com/mipeal" target="_blank" class="hidden md:inline-flex items-center text-sm font-bold uppercase tracking-widest hover:text-[#FFD700] transition-colors group">
+                    View GitHub <i class="fa-solid fa-arrow-right ml-2 transform group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
+            <!-- Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-1">
+                <!-- Project 1 -->
+                <a href="https://github.com/Open-Cyber-Range/Ranger" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
+                    </div>
+                    <div class="z-10">
+                        <span class="inline-block px-2 py-1 bg-orange-500/20 text-orange-500 text-xs font-bold uppercase mb-4">Rust</span>
+                        <h3 class="text-3xl font-bold uppercase">Ranger</h3>
+                        <p class="text-gray-500 mt-2 text-sm line-clamp-3">
+                            Core component for the Open Cyber Range. High-performance orchestration tool written in Rust.
+                        </p>
+                    </div>
+                    <!-- Red to Yellow Gradient Background Effect -->
+                    <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="z-10 mt-auto">
+                        <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// OPEN SOURCE</span>
+                    </div>
+                </a>
+
+                <!-- Project 2 -->
+                <a href="https://github.com/Open-Cyber-Range/Deputy" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
+                    </div>
+                    <div class="z-10">
+                        <span class="inline-block px-2 py-1 bg-orange-500/20 text-orange-500 text-xs font-bold uppercase mb-4">Rust</span>
+                        <h3 class="text-3xl font-bold uppercase">Deputy</h3>
+                        <p class="text-gray-500 mt-2 text-sm">
+                             Security enforcement and monitoring agent. Part of the OCR ecosystem.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="z-10 mt-auto">
+                        <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// OPEN SOURCE</span>
+                    </div>
+                </a>
+
+                <!-- Project 3 -->
+                <a href="https://github.com/Open-Cyber-Range/SDL-parser" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
+                    </div>
+                    <div class="z-10">
+                        <span class="inline-block px-2 py-1 bg-orange-500/20 text-orange-500 text-xs font-bold uppercase mb-4">Rust</span>
+                        <h3 class="text-3xl font-bold uppercase">SDL Parser</h3>
+                        <p class="text-gray-500 mt-2 text-sm">
+                             Scenario Description Language parser for defining cyber range exercises automatically.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="z-10 mt-auto">
+                        <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// PARSER TOOL</span>
+                    </div>
+                </a>
+
+                <!-- Project 4 -->
+                <a href="https://github.com/Open-Cyber-Range/Openstack-Handler" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
+                     <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
+                    </div>
+                    <div class="z-10">
+                        <span class="inline-block px-2 py-1 bg-blue-500/20 text-blue-400 text-xs font-bold uppercase mb-4">Python</span>
+                        <h3 class="text-3xl font-bold uppercase">Openstack Handler</h3>
+                        <p class="text-gray-500 mt-2 text-sm">
+                             Python handler for interacting with Openstack virtualization platforms.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="z-10 mt-auto">
+                        <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// INFRASTRUCTURE</span>
+                    </div>
+                </a>
+                
+                 <!-- Project 5 -->
+                 <a href="https://github.com/ncr-no/JuleCTF" target="_blank" class="group relative h-[400px] bg-[#111] border border-white/5 hover:border-[#FF2E2E] transition-all duration-300 flex flex-col justify-between p-8 overflow-hidden">
+                     <div class="absolute top-0 right-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-[#FFD700] text-xl"></i>
+                    </div>
+                    <div class="z-10">
+                        <span class="inline-block px-2 py-1 bg-green-500/20 text-green-400 text-xs font-bold uppercase mb-4">Security</span>
+                        <h3 class="text-3xl font-bold uppercase">Jule CTF</h3>
+                        <p class="text-gray-500 mt-2 text-sm">
+                             Challenge set for the 2022 Norwegian Christmas Capture The Flag competition.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 right-0 w-48 h-48 bg-gradient-to-tl from-[#FF2E2E]/20 to-transparent rounded-tl-full transform translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+                    <div class="z-10 mt-auto">
+                        <span class="text-xs font-mono text-gray-600 group-hover:text-[#FFD700] transition-colors">/// EVENT</span>
+                    </div>
+                </a>
+
+                <!-- More Link -->
+                <a href="https://github.com/mipeal" target="_blank" class="group relative h-[400px] bg-[#FF2E2E] text-black flex flex-col justify-center items-center p-8 overflow-hidden hover:bg-[#FFD700] transition-colors duration-300">
+                    <h3 class="text-4xl font-black uppercase text-center mb-2">Explore<br>More</h3>
+                    <div class="w-12 h-1 bg-black group-hover:w-24 transition-all duration-300"></div>
+                    <i class="fa-brands fa-github text-5xl mt-6 transform group-hover:scale-125 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- "Off Code" / About Section -->
+    <section id="about" class="py-24 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row gap-16">
+                <!-- Left: Image/Visual -->
+                <div class="lg:w-1/2">
+                    <div class="relative">
+                        <!-- Decorative borders -->
+                        <div class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-[#FF2E2E]"></div>
+                        <div class="absolute -bottom-4 -right-4 w-24 h-24 border-b-4 border-r-4 border-[#FFD700]"></div>
+                        
+                        <div class="bg-neutral-900 aspect-[4/5] flex items-center justify-center border border-gray-800">
+                            <div class="text-center p-10">
+                                <i class="fa-solid fa-terminal text-8xl text-neutral-800 mb-6"></i>
+                                <p class="text-gray-500 font-mono text-sm">MD MUJAHID ISLAM PEAL</p>
+                                <p class="text-[#FF2E2E] font-bold text-xl mt-2">NTNU, NORWAY</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Content -->
+                <div class="lg:w-1/2 flex flex-col justify-center">
+                    <span class="text-[#FF2E2E] font-mono text-sm mb-4">/// BIOGRAPHY</span>
+                    <h2 class="text-5xl md:text-6xl font-bold uppercase tracking-tighter mb-8">OFF CODE</h2>
+                    
+                    <p class="text-xl text-gray-300 leading-relaxed mb-6">
+                        "Let us flow in the darkness. Seems we are far from there."
+                    </p>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        I am a Senior Engineer at the <strong class="text-white">Norwegian Cyber Range</strong> (NTNU), specializing in building resilient cyber infrastructure. My work bridges the gap between complex virtualization technology and actionable security training environments.
+                    </p>
+                    <p class="text-gray-400 mb-8 leading-relaxed">
+                        With a deep focus on <strong class="text-white">Rust</strong> and <strong class="text-white">Python</strong>, I develop tools like 'Ranger' and 'Deputy' that automate the deployment of massive-scale cyber exercises for NATO and other partners.
+                    </p>
+
+                    <!-- Mini Timeline -->
+                    <div class="space-y-6 border-l border-gray-800 pl-8 mt-4">
+                        <div class="relative">
+                            <div class="absolute -left-[37px] top-1 w-4 h-4 bg-[#FF2E2E] rounded-full shadow-[0_0_10px_#FF2E2E]"></div>
+                            <h4 class="text-white font-bold uppercase">Senior Engineer</h4>
+                            <p class="text-sm text-gray-500">NTNU / Norwegian Cyber Range • 2021 - Present</p>
+                        </div>
+                        <div class="relative">
+                            <div class="absolute -left-[37px] top-1 w-4 h-4 bg-gray-700 rounded-full"></div>
+                            <h4 class="text-white font-bold uppercase">Organizer</h4>
+                            <p class="text-sm text-gray-500">S2G Playground • Event Management</p>
+                        </div>
+                         <div class="relative">
+                            <div class="absolute -left-[37px] top-1 w-4 h-4 bg-gray-700 rounded-full"></div>
+                            <h4 class="text-white font-bold uppercase">Research Assistant</h4>
+                            <p class="text-sm text-gray-500">NTNU • 2021</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- The Stack / Helmets Style List -->
+    <section id="stack" class="py-20 bg-[#050505] border-y border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-6xl font-bold uppercase tracking-tighter">Technical Arsenal</h2>
+                <p class="text-gray-500 mt-4">The tools used to build the range</p>
+            </div>
+
+            <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                <!-- Tech Pill -->
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FF2E2E] transition-colors cursor-default">
+                    <i class="fa-brands fa-rust text-3xl text-white"></i>
+                    <div>
+                        <span class="block text-xs text-gray-500 uppercase">Language</span>
+                        <span class="block text-xl font-bold text-white">RUST</span>
+                    </div>
+                </div>
+                <!-- Tech Pill -->
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FFD700] transition-colors cursor-default">
+                    <i class="fa-brands fa-python text-3xl text-blue-400"></i>
+                    <div>
+                        <span class="block text-xs text-gray-500 uppercase">Language</span>
+                        <span class="block text-xl font-bold text-white">PYTHON</span>
+                    </div>
+                </div>
+                <!-- Tech Pill -->
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FF2E2E] transition-colors cursor-default">
+                    <i class="fa-brands fa-docker text-3xl text-blue-600"></i>
+                    <div>
+                        <span class="block text-xs text-gray-500 uppercase">Container</span>
+                        <span class="block text-xl font-bold text-white">DOCKER</span>
+                    </div>
+                </div>
+                 <!-- Tech Pill -->
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FFD700] transition-colors cursor-default">
+                    <i class="fa-solid fa-cloud text-3xl text-gray-400"></i>
+                    <div>
+                        <span class="block text-xs text-gray-500 uppercase">Cloud</span>
+                        <span class="block text-xl font-bold text-white">OPENSTACK</span>
+                    </div>
+                </div>
+                 <!-- Tech Pill -->
+                <div class="px-8 py-4 border border-gray-800 bg-[#111] flex items-center space-x-4 hover:border-[#FF2E2E] transition-colors cursor-default">
+                    <i class="fa-solid fa-shield-halved text-3xl text-[#FF2E2E]"></i>
+                    <div>
+                        <span class="block text-xs text-gray-500 uppercase">Domain</span>
+                        <span class="block text-xl font-bold text-white">CYBERSEC</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="py-24 bg-black relative overflow-hidden">
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <p class="text-[#FF2E2E] font-mono mb-6">/// CONNECT</p>
+            <h2 class="text-5xl md:text-8xl font-black uppercase tracking-tighter mb-12 leading-none hover:text-stroke transition-all cursor-default">
+                LET'S BUILD<br>SECURELY
+            </h2>
+            
+            <div class="flex flex-col md:flex-row justify-center items-center gap-8 mb-16">
+                <a href="mailto:md.m.i.peal@ntnu.no" class="px-10 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-[#FF2E2E] hover:text-white transition-colors">
+                    Email Me
+                </a>
+                <a href="https://github.com/mipeal" target="_blank" class="px-10 py-4 border border-white text-white font-bold uppercase tracking-widest hover:border-[#FFD700] hover:text-[#FFD700] transition-colors">
+                    GitHub
+                </a>
+                 <a href="https://www.ntnu.edu/employees/md.m.i.peal" target="_blank" class="px-10 py-4 border border-white text-white font-bold uppercase tracking-widest hover:border-[#FF2E2E] hover:text-[#FF2E2E] transition-colors">
+                    NTNU Profile
+                </a>
+            </div>
+
+            <div class="border-t border-gray-900 pt-12 flex flex-col md:flex-row justify-between items-center text-gray-600 text-sm">
+                <p>&copy; 2025 Md Mujahid Islam Peal. All rights reserved.</p>
+                <div class="mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="hover:text-[#FF2E2E]">Privacy</a>
+                    <a href="#" class="hover:text-[#FFD700]">Terms</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Big Footer Texture -->
+        <div class="absolute bottom-0 left-0 w-full text-[20vw] font-black text-white/5 leading-none pointer-events-none select-none text-center overflow-hidden">
+            PEAL
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('translate-x-full');
+        }
+
+        // --- WARP SPEED CANVAS ANIMATION (Red & Yellow) ---
+        const canvas = document.getElementById('hero-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        let width, height;
+        let stars = [];
+        const STAR_COUNT = 200;
+        const SPEED = 0.2; // Slightly faster for red/yellow aggressive theme
+        const ACCEL = 1.05; 
+
+        function resize() {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            canvas.width = width;
+            canvas.height = height;
+            stars = [];
+            for(let i=0; i<STAR_COUNT; i++) {
+                stars.push(createStar());
+            }
+        }
+
+        function createStar() {
+            return {
+                x: Math.random() * width - width/2,
+                y: Math.random() * height - height/2,
+                z: Math.random() * width // depth
+            };
+        }
+
+        function draw() {
+            // Clear with trail effect
+            ctx.fillStyle = 'rgba(5, 5, 5, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+            
+            ctx.translate(width/2, height/2);
+            
+            stars.forEach((star) => {
+                // Move star closer
+                star.z -= SPEED * 50;
+                
+                if(star.z <= 0) {
+                    let s = createStar();
+                    star.x = s.x;
+                    star.y = s.y;
+                    star.z = width;
+                }
+                
+                // Project star to 2D
+                const sx = (star.x / star.z) * width;
+                const sy = (star.y / star.z) * height;
+                
+                // Calculate size based on depth
+                const size = (1 - star.z / width) * 4;
+                
+                // Draw star (Random Mix of Red and Yellow)
+                ctx.beginPath();
+                const isRed = Math.random() > 0.5;
+                ctx.fillStyle = isRed ? '#FF2E2E' : '#FFD700';
+                ctx.arc(sx, sy, size, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            ctx.translate(-width/2, -height/2);
+            requestAnimationFrame(draw);
+        }
+
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+
+        // --- INTERSECTION OBSERVER FOR SCROLL REVEAL ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: "0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('fade-in-up');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            // Select additional sections if needed
+            // const sections = document.querySelectorAll('section');
+            // sections.forEach(sec => observer.observe(sec));
+        });
+    </script>
 </body>
-
 </html>
