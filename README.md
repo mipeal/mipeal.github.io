@@ -117,15 +117,15 @@ me.get_connected()
 **I Mostly Code in Python** 
 
 ```text
-Python                   18 repos            ██████████░░░░░░░░░░░░░░░   41.86 % 
-TypeScript               6 repos             ███░░░░░░░░░░░░░░░░░░░░░░   13.95 % 
-HTML                     4 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   09.30 % 
-JavaScript               2 repos             █░░░░░░░░░░░░░░░░░░░░░░░░   04.65 % 
-C                        1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   02.33 % 
+Python                   18 repos            ███████████░░░░░░░░░░░░░░   43.90 % 
+TypeScript               6 repos             ████░░░░░░░░░░░░░░░░░░░░░   14.63 % 
+HTML                     4 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   09.76 % 
+JavaScript               2 repos             █░░░░░░░░░░░░░░░░░░░░░░░░   04.88 % 
+C                        1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   02.44 % 
 ```
 
 
 
 
- Last Updated on 15/12/2025 01:55:30 UTC
+ Last Updated on 22/12/2025 01:57:34 UTC
 <!--END_SECTION:waka-->
