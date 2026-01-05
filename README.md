@@ -112,7 +112,7 @@ me.get_connected()
 
 ## 💻 Coding Stats
 <!--START_SECTION:waka-->
-![Lines of code](https://img.shields.io/badge/From%20Hello%20World%20I%27ve%20Written-3.1%20million%20lines%20of%20code-blue)
+![Lines of code](https://img.shields.io/badge/From%20Hello%20World%20I%27ve%20Written-3.08%20million%20lines%20of%20code-blue)
 
 **I Mostly Code in Python** 
 
@@ -127,5 +127,5 @@ C                        1 repo              █░░░░░░░░░░�
 
 
 
- Last Updated on 29/12/2025 02:01:05 UTC
+ Last Updated on 05/01/2026 02:04:26 UTC
 <!--END_SECTION:waka-->
