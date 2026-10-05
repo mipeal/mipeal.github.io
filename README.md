@@ -112,20 +112,20 @@ me.get_connected()
 
 ## 💻 Coding Stats
 <!--START_SECTION:waka-->
-![Lines of code](https://img.shields.io/badge/From%20Hello%20World%20I%27ve%20Written-3.37%20million%20lines%20of%20code-blue?style=flat)
+![Lines of code](https://img.shields.io/badge/From%20Hello%20World%20I%27ve%20Written-3.51%20million%20lines%20of%20code-blue?style=flat)
 
 **I Mostly Code in Python** 
 
 ```text
-Python                   15 repos            █████████░░░░░░░░░░░░░░░░   37.50 % 
-TypeScript               7 repos             ████░░░░░░░░░░░░░░░░░░░░░   17.50 % 
-Shell                    4 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   10.00 % 
-HTML                     4 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   10.00 % 
-JavaScript               3 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   07.50 % 
+Python                   23 repos            ████████████░░░░░░░░░░░░░   47.92 % 
+TypeScript               8 repos             ████░░░░░░░░░░░░░░░░░░░░░   16.67 % 
+HTML                     4 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   08.33 % 
+JavaScript               3 repos             ██░░░░░░░░░░░░░░░░░░░░░░░   06.25 % 
+C                        1 repo              █░░░░░░░░░░░░░░░░░░░░░░░░   02.08 % 
 ```
 
 
 
 
- Last Updated on 28/09/2026 04:15:07 UTC
+ Last Updated on 05/10/2026 04:37:50 UTC
 <!--END_SECTION:waka-->
